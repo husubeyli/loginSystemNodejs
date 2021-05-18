@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form id="register-form" method="POST" action="/api/register">
+        <input type="text" autocomplete="off" placeholder="username" name="username" id="username">
+        <input type="password" autocomplete="off" placeholder="password" name="password" id="password">
+        <input type="submit" value="Submit Form"/>
+    </form>
+</body>
+<script>
+    const form = document.getElementById('register-form')
+    form.addEventListener('submit', registerUser)
+
+    async function registerUser(event) {
+        event.preventDefault()
+        const username = document.getElementById('username').value
+        const password = document.getElementById('password').value
+
+        console.log(username)
+        console.log(password)
+        
+        fetch('/api/register', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        }).then((res) => res.json())
+
+        if (result.status === 'ok') {
+            // everythign went fine
+            console.log('Success')
+        } else {
+            console.log(result.error)
+        }
+        
+    }
+</script>
+</html>
